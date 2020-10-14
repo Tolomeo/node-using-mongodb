@@ -8,9 +8,31 @@ export const addnewProduct = (req, res) => {
 
     newProduct.save((err, Product) => {
         if (err) {
-            res.status(400).json(err);
+            res.status(500).json(err);
         }
 
         res.status(200).json(Product);
+    })
+}
+
+export const getProducts = (req, res) => {
+    Product.find({}, (err, Product) => {
+        if (err) {
+            res.status(500).json(err);
+        }
+
+        res.status(200).json(Product);
+    })
+}
+
+export const getProductWithID = (req, res) => {
+    Product.findById(req.params.ProductID, (err, Product) => {
+        Product.find({}, (err, Product) => {
+            if (err) {
+                res.status(500).json(err);
+            }
+    
+            res.status(200).json(Product);
+        })
     })
 }
