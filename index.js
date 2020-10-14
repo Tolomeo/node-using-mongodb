@@ -1,5 +1,9 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import mongoose from 'mongoose'
+
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://localhost/productsdb', { useNewUrlParser: true, useUnifiedTopology: true });
 
 const app = express();
 const PORT = 4000;
