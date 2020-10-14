@@ -1,4 +1,4 @@
-import { addnewProduct, getProducts, getProductWithID } from '../controllers/controllers'
+import { addnewProduct, deleteProduct, getProducts, getProductWithID, updateProduct } from '../controllers/controllers'
 
 export const routes = app => {
 
@@ -6,6 +6,9 @@ export const routes = app => {
        .post(addnewProduct)
         .get(getProducts);
  
-    app.route('/products/:ProductID').get(getProductWithID);
+    app.route('/products/:ProductID')
+        .get(getProductWithID)
+        .put(updateProduct)
+        .delete(deleteProduct);
 
 }

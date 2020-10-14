@@ -9,6 +9,7 @@ export const addnewProduct = (req, res) => {
     newProduct.save((err, Product) => {
         if (err) {
             res.status(500).json(err);
+            return;
         }
 
         res.status(200).json(Product);
@@ -19,6 +20,7 @@ export const getProducts = (req, res) => {
     Product.find({}, (err, Product) => {
         if (err) {
             res.status(500).json(err);
+            return;
         }
 
         res.status(200).json(Product);
@@ -30,9 +32,32 @@ export const getProductWithID = (req, res) => {
         Product.find({}, (err, Product) => {
             if (err) {
                 res.status(500).json(err);
+                return;
             }
     
             res.status(200).json(Product);
         })
+    })
+}
+
+export const updateProduct = (req, res) => {
+    Product.findOneAndUpdate({ _id: req.params.ProductID }, req.body, { new: true, useFindAndModify: false }, (err, Product) => {
+        if (err) {
+            res.status(500).json(err);
+            return;
+        }
+
+        res.status(200).json(Product);
+    });
+}
+
+export const deleteProduct = (req, res) => {
+    Product.deleteOne({ _id: req.params.ProductID}, (err, Product) => {
+        if (err) {
+            res.status(500).json(err);
+            return;
+        }
+
+        res.json({ message: 'successfully deleted product' });
     })
 }
